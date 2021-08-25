@@ -26,7 +26,7 @@ msgstr "Wis uit"
 
 msgctxt "#32002"
 msgid "Move Up"
-msgstr ""
+msgstr "Move Up"
 
 msgctxt "#32003"
 msgid "Move Down"
