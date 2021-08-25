@@ -1,0 +1,37 @@
+name: Close Translation Pull Requests
+
+on:
+  pull_request:
+    branches: [ master, main, dev ]
+
+jobs:
+
+  close-translation-prs:
+
+    name: Close Translation Pull Requests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get changed files
+        id: modified_files
+        uses: trilom/file-changes-action@v1.2.4
+
+      - name: Check for translation
+        id: check
+        run: |
+          shopt -s nocasematch
+          if [[ *"en_gb/strings.po"* = ${{ steps.modified_files.outputs.files_modified }} ]]; then
+            echo ::set-output name=close::false
+          elif [[ *"strings.po"* = ${{ steps.modified_files.outputs.files_modified }} ]]; then
+            echo ::set-output name=close::true
+          elif [[ *"strings.po"* = ${{ steps.modified_files.outputs.files_added }} ]]; then
+            echo ::set-output name=close::true
+          else
+            echo ::set-output name=close::false
+          fi
+
+      - name: Close PR
+        uses: peter-evans/close-pull@v1
+        with:
+          comment: "Translations are not accepted through PRs, please use Weblate if you'd like to contribute to the translations.\nFor more information see Issue #58.\n\nIf you feel this PR was closed in error, please reply below."
+        if: ${{ steps.check.outputs.close }}
