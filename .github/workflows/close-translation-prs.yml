@@ -7,7 +7,7 @@ on:
 jobs:
 
   close-translation-prs:
-    if: github.actor != 'weblate' && github.actor != 'anxdpanic'
+    if: github.actor != 'weblate'
 
     name: Close Translation Pull Requests
     runs-on: ubuntu-latest
