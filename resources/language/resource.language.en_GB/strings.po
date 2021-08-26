@@ -514,4 +514,4 @@ msgstr ""
 
 msgctxt "#32124"
 msgid "This addon is for skin developers, and requires skin support"
-msgstr "This addon is for skin developers, and requires skin support"
+msgstr "This addon is for skin developers, and requires skin support!"
